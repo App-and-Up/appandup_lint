@@ -1,0 +1,214 @@
+# App and Up SRL LINTER preferences for Dart and Flutter applications
+# v1.0.0
+
+# Include and activate all linter rules. Later below we disabled the ones we aren't goint to use.
+include: all_lint_rules.yaml
+
+analyzer:
+
+  # We exclude generated files and specific file extensions we don't want these rules to be applied to.
+  # *.g.dart files - This is the common extension for generated dart files.
+  # *.freezed.dart - This is the common extension for freezed generated dart files.
+  # test/.test_coverage.dart - This is a generated file from the test_coverage package.
+  # bin/cache/** - This is the directory where flutter and dart cache is contained.
+  # 
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "test/.test_coverage.dart"
+    - "bin/cache/**"
+
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+
+  errors:
+    # If we don't have this the 'all_lint_rules.yaml' import causes a warning because of some rule conflicts.
+    # We want to enable conflicting rules as well and we are going to fix the conflicts in this file.
+    included_file_warning: false
+
+    # Allow having TODOs in the code, while making it easy for team members to spot them.
+    todo: info
+
+    # Treat missing required parameters as an error
+    missing_required_param: error
+
+    # Treat missing returns as an error
+    missing_return: error
+
+    # DON'T assign new values to parameters of methods and functions
+    #
+    # "Assigning new values to parameters is generally a bad practice unless an operator
+    #  such as ??= is used. Otherwise, arbitrarily reassigning parameters is usually a mistake."
+    #
+    # This rule doesn't allow for ??= to be used, so we'll keep it as a warning and override 
+    # locally if the ??= operator is used.
+    #
+    parameter_assignments: warning
+
+linter:
+  rules:
+    # ALWAYS separate the control structure expression from its statement.
+    #
+    # We want this below to be valid
+    # if (a == null) return;
+    # 
+    # while this rule would force us to write it like so:
+    # if (a == null)
+    #   return;
+    #
+    always_put_control_body_on_new_line: false
+
+    # ALWAYS specify @required on named parameter before other named parameters.
+    #
+    # Conflicts with the convention used by flutter, which puts `Key key`
+    # and `@required Widget child` last.
+    #
+    always_put_required_named_parameters_first: false
+
+    # ALWAYS specify type annotations.
+    #
+    # We want to allow to use var, dynamic and Object. 
+    # As well as final varName without necessarily specifying types
+    #
+    always_specify_types: false
+
+    # ALWAYS use package imports for files in lib/.
+    #
+    # This conflicts with "prefer_relative_imports" so we turn it OFF.
+    # We do prefer relative imports instead.
+    #
+    always_use_package_imports: false
+
+    # AVOID annotating with dynamic when not required.
+    #
+    # Violates Effective Dart "PREFER annotating with dynamic instead of letting inference fail", it
+    # also conflicts with strong mode disabling `implicit-dynamic`. Turning it OFF as well.
+    #
+    avoid_annotating_with_dynamic: false
+
+    # AVOID catches without on clauses.
+    #
+    # Using catch clauses without on clauses make your code prone to encountering unexpected errors that
+    # won't be thrown (and thus will go unnoticed). BUT, there are situations where we voluntarily want to
+    # catch everything.
+    #
+    avoid_catches_without_on_clauses: false
+
+    # AVOID defining a class that contains only static members.
+    #
+    # We want to be able to define style classes with static members in a similar way Colors does in material.
+    #
+    avoid_classes_with_only_static_members: false
+
+    # AVOID redundant argument values.
+    # 
+    # Redundand argument values often make the code more clear and descriptive. 
+    # We don't want to force their removal.
+    #
+    avoid_redundant_argument_values: false
+
+    # AVOID annotating types for function expression parameters.
+    #
+    # Annotating types for function expression parameters is usually unnecessary because the
+    # parameter types can almost always be inferred from the context, thus making the practice redundant.
+    # 
+    # However we don't want to force this all the time, therefore we'll turn this one off.
+    #
+    avoid_types_on_closure_parameters: false
+
+    # DO invoke close on instances of dart.core.Sink.
+    #
+    # Disabling it, may generate false positives. https://github.com/dart-lang/linter/issues/1381.
+    #
+    close_sinks: false
+
+    # DO reference all public properties in debug method implementations.
+    #
+    # Consider using this lint rule if you are making a public Flutter package, for private ones and private apps
+    # I recommend keeping it off as you probably won't be making diagnostic properties for all your
+    # classes, unless you are using a data class lib that does it for you via code generation.
+    #
+    diagnostic_describe_all_properties: false
+
+    # DO Use Flutter TO-DO format.
+    #
+    # Flutter todos look like this:
+    # // TODO(username): message.
+    #
+    # We don't want to enforce it. 
+    #
+    flutter_style_todos: false
+
+    # AVOID lines longer than 80 characters
+    #
+    # This would force 81 chars lines to be split in two.
+    # Not necessary as long as we keep it sane.
+    #
+    lines_longer_than_80_chars: false
+
+    # DO define default behavior outside switch statements.
+    #
+    # This wouldn't allow to use the default case in switch statements.
+    #
+    # It would enforce such a syntax instead:
+    # switch (testEnum) {
+    #   case TestEnum.A:
+    #     return '123';
+    # }
+    #
+    # // Default here.
+    # return null;
+    #
+    # Personal preference we don't want to enforce it.
+    no_default_cases: false
+
+    # CONSIDER omitting type annotations for local variables.
+    #
+    # We don't want to force it.
+    #
+    omit_local_variable_types: false
+
+    # PREFER asserts with a message string.
+    #
+    # Dart does nowadays create very clear messages from the assert terms.
+    #
+    prefer_asserts_with_message: false
+
+    # PREFER defining constructors instead of static methods to create instances.
+    #
+    # There are cases where we want to reference static members instead.
+    #
+    prefer_constructors_over_static_methods: false
+
+    # DO use double quotes where they wouldn't require additional escapes.
+    #
+    # We don't need to enforce any preference for string quotes. Disabling it.
+    #
+    prefer_double_quotes: false
+
+    # DO document all public members.
+    #
+    # All non-overriding public members should be documented with /// doc-style comments.
+    # we don't want to enforce it in a package and decide to enable it or not for each project.
+    #
+    public_member_api_docs: false
+
+    # DO use trailing commas for all function calls and declarations unless the function call or definition,
+    # from the start of the function name up to the closing parenthesis, fits in a single line.
+    #
+    # Experimental rule, not very useful at the moment
+    #
+    require_trailing_commas: false
+
+    # DO sort constructor declarations before other members.
+    #
+    # We don't want to enforce this, also it does force to have factories and secondary constructors above
+    # properties, which is really unconvenient.
+    sort_constructors_first: false
+
+    # DON'T use final for local variables.
+    #
+    # Incompatible with `prefer_final_locals`
+    #
+    unnecessary_final: false
