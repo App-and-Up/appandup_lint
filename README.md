@@ -1,6 +1,6 @@
 # appandup_lint
 
-A new Flutter package project.
+App and Up SRL LINTER preferences for Dart and Flutter applications
 
 ## How to use this package
 
