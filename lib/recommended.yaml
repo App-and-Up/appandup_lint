@@ -2,7 +2,7 @@
 # v1.0.0
 
 # Include and activate all linter rules. Later below we disabled the ones we aren't goint to use.
-include: all_lint_rules.yaml
+include: ../all_lint_rules.yaml
 
 analyzer:
 

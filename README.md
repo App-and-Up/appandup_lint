@@ -1,6 +1,6 @@
 # appandup_lint
 
-App and Up SRL LINTER preferences for Dart and Flutter applications
+App and Up SRL Lint preferences for Dart and Flutter applications
 
 ## How to use this package
 
