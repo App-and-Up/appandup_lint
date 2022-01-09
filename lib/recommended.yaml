@@ -317,7 +317,7 @@ linter:
     # Not necessary for an app or the examples in a pub.dev package. I always enable this for
     # public packages.
     #
-    # public_member_api_docs: false
+    public_member_api_docs: false
 
     # DO use trailing commas for all function calls and declarations unless the function call or
     # definition, from the start of the function name up to the closing parenthesis,
