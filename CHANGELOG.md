@@ -1,3 +1,6 @@
+# 0.0.3
+Improved rules for production projects.
+
 # 0.0.2
 Removed flutter dependency
 
