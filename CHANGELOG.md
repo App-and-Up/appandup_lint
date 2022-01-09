@@ -1,3 +1,8 @@
+# 0.0.5
+- Disabled public_member_api_docs, which enforced to write a doc comment on every public member of the API.
+Very useful and definitely recommended for packages, not so much for apps.
+- Updated README.md 
+
 # 0.0.4
 Disabled always_specify_types as it forces us to declare types of obvious values. 
 
