@@ -345,3 +345,36 @@ linter:
     # use `prefer_final_locals` instead.
     #
     unnecessary_final: false
+
+    ###
+    # This forces us to add an empty new line at the end of the file.
+    # Completely unnecessary.
+    ###
+    eol_at_end_of_file: false
+
+
+    ###
+    # This forces you to use setters instead of function to change public local fields.
+    #
+    # At times functions are more idiomatic, so we want to leave the option there.
+    ###
+    use_setters_to_change_properties: false
+
+    ###
+    # This forces to sort pub dependencies.
+    # I split and sort them by feature manually, so I don't want this.
+    ###
+    sort_pub_dependencies: false
+
+
+    ###
+    # Doesn't display info when trying to use context in async functions.
+    # e.g. navigation after writing to db
+    ###
+    use_build_context_synchronously: false
+
+    ###
+    # Discourages using default in switch statements.
+    # Collides with the one forcing all cases.
+    ###
+    no_default_cases: false
