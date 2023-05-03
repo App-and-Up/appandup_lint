@@ -1,0 +1,58 @@
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+    # We want to enforce providers being static, they shouldn't be created inside functions or classes.
+    - avoid_dynamic_providers
+
+    # Ref should only be accessible within the provider itself.
+    - avoid_exposing_provider_ref
+
+    # Widget refs should only be accessible within the Widget that created it.
+    - avoid_exposing_widget_ref
+
+    # We don't want to expose the provider container, it should only be used by an UncontrolledProviderScope.
+    - avoid_global_provider_container
+
+    # This is a very opinionated rule, but we want to providers to depend on generated providers.
+    # Nothing techinically wrong with that, but it may break rules such as "provider_dependencies"
+    - avoid_manual_providers_as_generated_provider_dependency
+
+    # When dealing with Notifiers and AsyncNotifiers, them having public properties is a bad idea.
+    # All their public API should be exposed through `state`.
+    - avoid_public_notifier_properties
+
+    # ref.read on AutoDisposeProviders is dangerous, as the provider might be disposed.
+    # We want to avoid that.
+    - riverpod_avoid_read_auto_dispose
+
+    # Should not be ref.read providers within the build method of widget or providers.
+    - riverpod_avoid_read_inside_build
+
+    # We want to avoid using ref.watch outside the build method of widgets or providers.
+    - riverpod_avoid_watch_outside_build
+
+    # During its initialization, a provider should not modify other providers.
+    - dont_modify_providers_during_init
+
+    # This would straight up throw an exception - let's avoid that.
+    - dont_modify_providers_inside_widget_lifecycles
+
+    # Classes annotated with @riverpod must extend _$ClassName
+    - generator_class_extends
+
+    # For riverpod to work, there must be a provider scope at the top of the widget tree.
+    - missing_provider_scope
+
+    # Prefer final variable over explicitly typed ones.
+    - prefer_final_provider
+
+    # Provider parameters should have consistent == and hashCode implementations.
+    - provider_parameters
+
+    - provider_dependencies
+    - scoped_providers_should_specify_dependencies
+    - stateless_ref
+    - unsupported_provider_value
