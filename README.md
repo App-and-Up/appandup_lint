@@ -18,9 +18,9 @@ dev_dependencies:
 include: package:appandup_lint/recommended.yaml
 ```
 
-3. If the project is using Riverpod, add the following line to your `analysis_options.yaml` as well.
+3. If the project is using Riverpod, add the following line to your `analysis_options.yaml`.
 ```yaml
-include: package:appandup_lint/riverpod.yaml
+include: package:appandup_lint/recommended_and_riverpod.yaml
 ```
 
 4. Run `flutter analyze` to see the errors and warnings

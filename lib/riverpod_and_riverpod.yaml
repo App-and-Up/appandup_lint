@@ -1,3 +1,5 @@
+include: recommended.yaml
+
 analyzer:
   plugins:
     - custom_lint
